@@ -4,10 +4,12 @@
  */
 package patients;
 
+import java.util.HashMap;
+
 /**
  *
  * @author maria
  */
-public class PatientsLists {
-    
+public class PatientsList implements KeyDynamicsLists<T> extends DynamicsLists {
+    private HashMap<String,Patient> patients;
 }
