@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package medicalrecords;
+
 import clinic.SequentialDynamicsLists;
+import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Stack;
+
 /**
  *
  * @author norki
@@ -13,36 +12,48 @@ import java.util.Stack;
 public class medicalrecordslist implements SequentialDynamicsLists<MedicalRecord> {
     private Stack<MedicalRecord> medicalHistory;
 
+    public medicalrecordslist() {
+        this.medicalHistory = new Stack<>();
+    }
+
     @Override
     public MedicalRecord get() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return medicalHistory.peek();
+        } catch (EmptyStackException e) {
+            return null;
+        }
     }
 
     @Override
     public boolean remove() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+         return   medicalHistory.pop() !=null;
+            
+        } catch (EmptyStackException e) {
+            return false; 
+        }
     }
 
     @Override
     public boolean add(MedicalRecord item) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      return  medicalHistory.add(item);
+       
     }
 
     @Override
     public Iterator getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      if (medicalHistory.isEmpty()) return null;
+      return medicalHistory.iterator();
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+return medicalHistory.size();
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+return medicalHistory.isEmpty();
     }
-    
-    
-    
 }
