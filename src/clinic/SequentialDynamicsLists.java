@@ -7,7 +7,10 @@ package clinic;
 /**
  *
  * @author maria
+ * @param <T>
+ * @param <K>
  */
-public interface SequentialDynamicsLists {
-    
+public interface SequentialDynamicsLists<T,K> extends DynamicLists<T, K> {
+    public T get();
+    public boolean remove();
 }
