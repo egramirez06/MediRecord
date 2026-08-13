@@ -2,39 +2,48 @@ package WaitingRoom;
 
 import clinic.SequentialDynamicsLists;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 import patients.Patient;
 
 public class WaitingRoomList implements SequentialDynamicsLists<Patient>{
         Queue<Patient> WaitingList;
+        
+        public WaitingRoomList(){
+        this.WaitingList = new LinkedList ();
+        }
 
     @Override
     public Patient get() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return WaitingList.peek();
     }
 
     @Override
     public boolean remove() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      return WaitingList.pull() != null;
     }
 
     @Override
     public boolean add(Patient item) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    try {
+    return WaitingList.add(item);
+    } catch (IllegalStateException e)  {
+        return false;
+    }
     }
 
     @Override
     public Iterator getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     return WaitingList.iterator();
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return WaitingList.size();
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   return WaitingList.isEmpty();
     }
 }
