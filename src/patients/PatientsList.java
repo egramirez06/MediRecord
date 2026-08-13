@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package patients;
-import clinic.KeyDinamicsLists;
+import clinic.KeyDynamicsLists;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -11,7 +11,7 @@ import java.util.Iterator;
  *
  * @author maria
  */
-public class PatientsList implements KeyDinamicsLists<Patient, String> {
+public class PatientsList implements KeyDynamicsLists<Patient, String> {
     private HashMap<String, Patient> patients;
 
     public PatientsList() {
