@@ -4,10 +4,16 @@
  */
 package appointments;
 
+
+import java.util.TreeSet;
+
 /**
  *
  * @author Stef
  */
-public class AppointmentLists {
+public class AppointmentLists implements KeyDynamicsLists<Appointment,String>{
+    TreeSet<Appointment> appointments;
+    
+   
     
 }
