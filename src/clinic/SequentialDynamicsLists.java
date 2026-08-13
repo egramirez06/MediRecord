@@ -8,9 +8,8 @@ package clinic;
  *
  * @author maria
  * @param <T>
- * @param <K>
  */
-public interface SequentialDynamicsLists<T,K> extends DynamicLists<T, K> {
+public interface SequentialDynamicsLists<T> extends DynamicLists<T> {
     public T get();
     public boolean remove();
 }
