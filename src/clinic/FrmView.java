@@ -19,7 +19,7 @@ public class FrmView extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmView.class.getName());
 
     /**
-     * Creates new form FrmView
+     * Creates new form FrmViews
      */
     public FrmView() {
         initComponents();
