@@ -20,7 +20,7 @@ public class WaitingRoomList implements SequentialDynamicsLists<Patient>{
 
     @Override
     public boolean remove() {
-      return WaitingList.pull() != null;
+      return WaitingList.poll() != null;
     }
 
     @Override
