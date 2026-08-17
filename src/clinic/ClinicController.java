@@ -1,21 +1,22 @@
+
 package clinic;
 public class ClinicController {
     private Clinic clinic;
-    private iView view;
+    private FrmView view;
     private static ClinicController controller;
     
-    public static ClinicController getInstance(iView view){
+    public static ClinicController getInstance(FrmView view){
     if (controller==null)
         controller=new ClinicController(view);
     return controller;
-    } 
-
-    public void setView(iView view) {
-        this.view = view;
     }
     
-    private ClinicController(iView view){
-    this.clinic = new clinic;
+    private ClinicController(FrmView view){
+    this.clinic = new Clinic();
     this.view = view;
+    }
+
+    public void setView(FrmView view) {
+        this.view = view;
     }
 }
