@@ -13,10 +13,10 @@ import java.util.TreeSet;
  *
  * @author Stef
  */
-public class AppointmentLists implements KeyDynamicsLists<Appointment,String>{
+public class AppointmentList implements KeyDynamicsLists<Appointment,String>{
     TreeSet<Appointment> appointments;
     
-    public AppointmentLists(){
+    public AppointmentList(){
         this.appointments = new TreeSet();
     }
  
