@@ -10,9 +10,9 @@ package clinic;
  */
 
     public interface FrmView<T> {
-    void clear();
-    void showData(T data);
-    void showError(String error);
-    void showMessage(String message);
+    public void clear();
+    public void showData(T data);
+    public void showError(String error);
+    public void showMessage(String message);
 }
 
