@@ -26,7 +26,6 @@ public class frmMedicalRecord extends javax.swing.JFrame {
     this.patient = patient;
     cargarPaciente(patient);
 }
-
     private void cargarPaciente(Patient patient) {
         if (patient == null) {
             return;
@@ -36,7 +35,6 @@ public class frmMedicalRecord extends javax.swing.JFrame {
         lblEdad.setText("Edad: " + patient.getAge());
 
         MedicalRecord record = patient.getLatestMedicalRecord();
-
         if (record != null) {
             lblFecha.setText(record.getDate().toString());
             txtRazonConsulta.setText(record.getConsultationReason());
@@ -165,7 +163,6 @@ public class frmMedicalRecord extends javax.swing.JFrame {
 
         lblRazonConsulta.setText("Razon de consulta");
 
-        txtRazonConsulta.setEditable(false);
         txtRazonConsulta.setColumns(20);
         txtRazonConsulta.setRows(5);
         jScrollPane1.setViewportView(txtRazonConsulta);
@@ -334,12 +331,9 @@ public class frmMedicalRecord extends javax.swing.JFrame {
                 .addComponent(pnlPatientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlMedicalRecord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91))))
+                    .addComponent(pnlMedicalRecord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,25 +354,24 @@ public class frmMedicalRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       if (patient == null) {
-        javax.swing.JOptionPane.showMessageDialog(this,"No hay un paciente seleccionado.");
-        return;
-    }
     String razon = txtRazon.getText().trim();
     String diagnostico = txtDiagnosticoAsignado.getText().trim();
     String tratamiento = txtTratamientoAsignado.getText().trim();
     String notas = txtNotasObservaciones.getText().trim();
+
     if (razon.isEmpty() || diagnostico.isEmpty() || tratamiento.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this,
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
                 "Debe completar la razón de consulta, diagnóstico y tratamiento.");
         return;
     }
     MedicalRecord record = new MedicalRecord(razon,diagnostico,tratamiento,notas);
     patient.addMedicalRecord(record);
-
     cargarPaciente(patient);
-    javax.swing.JOptionPane.showMessageDialog(this,
-            "Registro médico guardado correctamente.");
+    javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Registro médico guardado correctamente."
+    );                 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
