@@ -27,11 +27,7 @@ public class Clinic {
         this.waitingRoom = new WaitingRoomList();    
     }
     public boolean addPatient(Patient patient) {
-      if (patient != null) {
-        return patients.add(patient);
-    } else {
-        return false;
-    }
+     return patients.add(patient);
     }
 
     public Patient findPatient(String id) {
@@ -47,24 +43,21 @@ public class Clinic {
     }
 
     public boolean scheduleAppointment(Appointment appointment) {
-        if(appointment == null){
-        return false;
-        }
         return appointments.add(appointment);
     }
 
     public Appointment findAppointment(String code) {
+        if(appointments.isEmpty() )return null;
         return appointments.get(code);
     }
 
     public boolean rescheduleAppointment(String code, LocalDate newDate, LocalTime newTime) {
-        Appointment appointment = appointments.get(code);
-    if (appointment == null) {
-        return false;
-    }
-    appointment.setDate(newDate);
-    appointment.setTime(newTime);
-    return true; 
+          Appointment Cita= appointments.get(code);
+          if(Cita!=null){
+          Cita.reschedule(newDate,newTime);
+          return true;
+          }
+          return false;
     }
 
     public boolean cancelAppointment(String code) {
@@ -78,21 +71,26 @@ public class Clinic {
     }
 
     public boolean checkInPatient(String patientId) {
-       Patient patient = patients.get(patientId);
+        Patient patient = patients.get(patientId);
     if (patient == null) {
         return false;
     }
-    return waitingRoom.enqueue(patient);
+    if (isPatientWaiting(patientId)) {
+        return false;
+    }
+    return waitingRoom.add(patient);
+        
     }
 
     public Patient getNextPatient() {
-        return waitingRoom.peek();
+        return waitingRoom.get();
 
     }
 
     public Patient attendNextPatient() {
-        return waitingRoom.dequeue();
-
+        Patient patient = waitingRoom.get();
+        waitingRoom.remove();
+        return patient;
     }
 
     public int getWaitingPatientCount() {
@@ -101,7 +99,14 @@ public class Clinic {
     }
 
     public boolean isPatientWaiting(String patientId) {
-        return waitingRoom.contains(patientId);
+        Iterator<Patient>i = waitingRoom.getAll();
+        while(i.hasNext()) {
+            Patient p= i.next();
+            if(p.getId().equals(patientId)){
+                return true;
+            }
+        }
+        return false;
     }
     
     
