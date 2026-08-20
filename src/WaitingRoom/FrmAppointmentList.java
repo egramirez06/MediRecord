@@ -99,6 +99,7 @@ implements FrmView{
         jLabel3.setText("Ultima Consulta");
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         javax.swing.GroupLayout pnlRegistroLayout = new javax.swing.GroupLayout(pnlRegistro);
         pnlRegistro.setLayout(pnlRegistroLayout);
@@ -219,19 +220,40 @@ implements FrmView{
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
-        String id = txtIdentificacion.getText();
-        if(id.trim().equals("")){
-            return;
-        }
-        controller.findPatient(id);
-        Patient pat = controller.findPatient(id);
-        if(pat == null){
-            showError("El paciente no existe");
-            clear();
-            return;
-        }
-        txtNombre.setText(pat.getFullName());
+    String id = txtIdentificacion.getText().trim();
+
+    if (id.isEmpty()) {
+        return;
+    }
+
+    Patient pat = controller.findPatient(id);
+
+    if (pat == null) {
+        showError("El paciente no existe");
+        clear();
+        return;
+    }
+
+    txtNombre.setText(pat.getFullName());
+}
+    
+        
     }//GEN-LAST:event_txtIdentificacionActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+         String id = txtIdentificacion.getText().trim();
+
+    if (id.isEmpty()) {
+        showError("Ingrese la identificación del paciente.");
+        return;
+    }
+
+    Patient patient = controller.findPatient(id);
+
+    if (patient == null) {
+        return;
+    }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
