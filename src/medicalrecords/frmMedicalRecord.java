@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package medicalrecords;
+import patients.Patient;
+import java.time.LocalDate;
 
 /**
  *
@@ -11,13 +13,46 @@ package medicalrecords;
 public class frmMedicalRecord extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmMedicalRecord.class.getName());
+    private Patient patient;
 
     /**
      * Creates new form frmMedicalRecor
      */
     public frmMedicalRecord() {
-        initComponents();
+     initComponents();
     }
+     public frmMedicalRecord(Patient patient) {
+        initComponents();
+    this.patient = patient;
+    cargarPaciente(patient);
+}
+
+    private void cargarPaciente(Patient patient) {
+        if (patient == null) {
+            return;
+        }
+    lblNombrePaciente.setText(patient.getFullName());
+        lblIdentificacion.setText("Identificación: " + patient.getId());
+        lblEdad.setText("Edad: " + patient.getAge());
+
+        MedicalRecord record = patient.getLatestMedicalRecord();
+
+        if (record != null) {
+            lblFecha.setText(record.getDate().toString());
+            txtRazonConsulta.setText(record.getConsultationReason());
+            txtDiagnostico.setText(record.getDiagnosis());
+            txtTratamiento.setText(record.getTreatment());
+            txtNotas.setText(record.getNotes());
+        } else {
+            lblFecha.setText("Sin consulta");
+            txtRazonConsulta.setText("");
+            txtDiagnostico.setText("");
+            txtTratamiento.setText("");
+            txtNotas.setText("");
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +84,8 @@ public class frmMedicalRecord extends javax.swing.JFrame {
         lblNotas = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtNotas = new javax.swing.JTextArea();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         pnlMedicalRecord = new javax.swing.JPanel();
         lblRazondeConsulta = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -151,6 +188,12 @@ public class frmMedicalRecord extends javax.swing.JFrame {
         txtNotas.setRows(5);
         jScrollPane4.setViewportView(txtNotas);
 
+        btnGuardar.setText("Guardar ");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
+
         javax.swing.GroupLayout pnlPatientInfoLayout = new javax.swing.GroupLayout(pnlPatientInfo);
         pnlPatientInfo.setLayout(pnlPatientInfoLayout);
         pnlPatientInfoLayout.setHorizontalGroup(
@@ -175,6 +218,12 @@ public class frmMedicalRecord extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
+            .addGroup(pnlPatientInfoLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPatientInfoLayout.setVerticalGroup(
             pnlPatientInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +248,10 @@ public class frmMedicalRecord extends javax.swing.JFrame {
                 .addComponent(lblNotas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(8, 8, 8)
+                .addGroup(pnlPatientInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar)))
         );
 
         lblRazondeConsulta.setText("Razon de consulta");
@@ -237,14 +289,15 @@ public class frmMedicalRecord extends javax.swing.JFrame {
                     .addGroup(pnlMedicalRecordLayout.createSequentialGroup()
                         .addGroup(pnlMedicalRecordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5)
                             .addGroup(pnlMedicalRecordLayout.createSequentialGroup()
-                                .addComponent(lblRazondeConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(lblTratamientoAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlMedicalRecordLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblDiagnosticoAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane5))
+                                .addGroup(pnlMedicalRecordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblRazondeConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTratamientoAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(pnlMedicalRecordLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(lblDiagnosticoAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(pnlMedicalRecordLayout.createSequentialGroup()
                         .addComponent(lblNotasObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,7 +338,6 @@ public class frmMedicalRecord extends javax.swing.JFrame {
                         .addComponent(pnlMedicalRecord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(91, 91, 91))))
         );
@@ -302,6 +354,32 @@ public class frmMedicalRecord extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+     dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       if (patient == null) {
+        javax.swing.JOptionPane.showMessageDialog(this,"No hay un paciente seleccionado.");
+        return;
+    }
+    String razon = txtRazon.getText().trim();
+    String diagnostico = txtDiagnosticoAsignado.getText().trim();
+    String tratamiento = txtTratamientoAsignado.getText().trim();
+    String notas = txtNotasObservaciones.getText().trim();
+    if (razon.isEmpty() || diagnostico.isEmpty() || tratamiento.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "Debe completar la razón de consulta, diagnóstico y tratamiento.");
+        return;
+    }
+    MedicalRecord record = new MedicalRecord(razon,diagnostico,tratamiento,notas);
+    patient.addMedicalRecord(record);
+
+    cargarPaciente(patient);
+    javax.swing.JOptionPane.showMessageDialog(this,
+            "Registro médico guardado correctamente.");
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,6 +407,8 @@ public class frmMedicalRecord extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -3,13 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package patients;
-
+import clinic.Clinic;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
 /**
  *
  * @author maria
  */
 public class FrmPatients extends javax.swing.JFrame {
-    
+    private Clinic clinic;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPatients.class.getName());
 
     /**
@@ -18,7 +20,10 @@ public class FrmPatients extends javax.swing.JFrame {
     public FrmPatients() {
         initComponents();
     }
-
+public FrmPatients(Clinic clinic) {
+    this.clinic = clinic;
+    initComponents();
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

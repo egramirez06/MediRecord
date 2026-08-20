@@ -1,8 +1,20 @@
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package appointments;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import patients.Patient;
-public class Appointment implements Comparable<Appointment> {
+
+/**
+ *
+ * @author jprod
+ */
+public class Appointment {
+    //implememtar Comparable<Appointment>
     private String code;
     private Patient patient;
     private LocalDate date;
@@ -13,18 +25,23 @@ public class Appointment implements Comparable<Appointment> {
     public String getCode() {
         return code;
     }
+
     public Patient getPatient() {
         return patient;
     }
+
     public LocalDate getDate() {
         return date;
     }
+
     public LocalTime getTime() {
         return time;
     }
+
     public String getReason() {
         return reason;
     }
+
     public AppointmentStatus getStatus() {
         return status;
     }
@@ -37,30 +54,23 @@ public class Appointment implements Comparable<Appointment> {
         this.reason = reason;
         this.status = AppointmentStatus.SCHEDULED;
     }
-
-    public void reschedule(LocalDate newDate, LocalTime newTime) {
-        this.date = newDate;
-        this.time = newTime;
-        this.status = AppointmentStatus.SCHEDULED;
+    
+    public void reschedule(LocalDate newDate, LocalTime newTime){
+        
     }
 
-    public void cancel() {
-        this.status = AppointmentStatus.CANCELLED;
+    public void cancel(){
+        
     }
 
-    public boolean isPending() {
-        return status == AppointmentStatus.SCHEDULED;
+    public boolean isPending(){
+        return false;
     }
 
-    public boolean isToday() {
-        return date.equals(LocalDate.now());
+    public boolean isToday(){
+        return false;
     }
 
-    @Override
-    public int compareTo(Appointment other) {
-   if(this.getDate().isBefore(other.getDate())) return -1;
-   if(this.getTime().isBefore(other.getTime())) return -1;
-   if(this.getCode().compareTo(other.getCode()) == -1) return -1;
-   return 1;
-}
+    //public int compareTo(Appointment other); date → time → code
+
 }
