@@ -1,19 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package patients;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Iterator;
 import medicalrecords.MedicalRecord;
 import medicalrecords.medicalrecordslist;
-
-/**
- *
- * @author jprod
- */
 public class Patient {
     private String id;
     private String fullName;
@@ -27,6 +17,7 @@ public class Patient {
     }
 
     public String getFullName() {
+        
         return fullName;
     }
 
@@ -60,7 +51,7 @@ public class Patient {
         this.birthDate = birthDate;
         this.phone = phone;
         this.email = email;
-        this.medicalHistory = new MedicalRecordsList();
+        this.medicalHistory = new medicalrecordslist();
     }
     
     private int calculateAge(){
