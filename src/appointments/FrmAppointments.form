@@ -85,7 +85,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jDateChooser1" max="32767" attributes="0"/>
+                                  <Component id="DateChooserFecha" max="32767" attributes="0"/>
                                   <Component id="comboxID" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -99,12 +99,12 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnVerRegistros3" max="32767" attributes="0"/>
-                                  <Component id="btnVerRegistros2" pref="202" max="32767" attributes="0"/>
+                                  <Component id="btnCancelarCita" max="32767" attributes="0"/>
+                                  <Component id="btnCitasPendientes" pref="202" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnVerRegistros4" max="32767" attributes="0"/>
+                                  <Component id="btnReprogramarCita" max="32767" attributes="0"/>
                                   <Component id="btnGuardar" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -112,7 +112,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnVerRegistros1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnBuscarCita" alignment="0" max="32767" attributes="0"/>
                           <Component id="comboxTelefono" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
                           <Component id="btnVerRegistros" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="btnEliminar" max="32767" attributes="0"/>
@@ -143,7 +143,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="comboxNombre" min="-2" max="-2" attributes="0"/>
-                          <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                          <Component id="DateChooserFecha" min="-2" max="-2" attributes="0"/>
                           <Component id="comboxTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -166,15 +166,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnVerRegistros4" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-                      <Component id="btnVerRegistros2" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
+                      <Component id="btnReprogramarCita" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="btnCitasPendientes" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnVerRegistros1" max="32767" attributes="0"/>
+                  <Component id="btnBuscarCita" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnVerRegistros3" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="btnCancelarCita" min="-2" pref="55" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -353,9 +353,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerRegistrosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    <Component class="com.toedter.calendar.JDateChooser" name="DateChooserFecha">
     </Component>
-    <Component class="javax.swing.JButton" name="btnVerRegistros1">
+    <Component class="javax.swing.JButton" name="btnBuscarCita">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -363,10 +363,10 @@
         <Property name="text" type="java.lang.String" value="Buscar Cita"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerRegistros1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarCitaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnVerRegistros2">
+    <Component class="javax.swing.JButton" name="btnCitasPendientes">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -374,10 +374,10 @@
         <Property name="text" type="java.lang.String" value="Citas Pendientes"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerRegistros2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCitasPendientesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnVerRegistros3">
+    <Component class="javax.swing.JButton" name="btnCancelarCita">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -385,10 +385,10 @@
         <Property name="text" type="java.lang.String" value="Cancelar Cita"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerRegistros3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarCitaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnVerRegistros4">
+    <Component class="javax.swing.JButton" name="btnReprogramarCita">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
@@ -396,7 +396,7 @@
         <Property name="text" type="java.lang.String" value="Reprogramar Cita"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerRegistros4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReprogramarCitaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

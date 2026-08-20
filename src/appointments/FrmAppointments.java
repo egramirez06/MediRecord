@@ -92,6 +92,10 @@ implements FrmView<Appointment>{
         comboxID = new javax.swing.JComboBox<>();
         btnVerRegistros = new javax.swing.JButton();
         DateChooserFecha = new com.toedter.calendar.JDateChooser();
+        btnBuscarCita = new javax.swing.JButton();
+        btnCitasPendientes = new javax.swing.JButton();
+        btnCancelarCita = new javax.swing.JButton();
+        btnReprogramarCita = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,21 +161,21 @@ implements FrmView<Appointment>{
         btnVerRegistros.setText("Ver Registros");
         btnVerRegistros.addActionListener(this::btnVerRegistrosActionPerformed);
 
-        btnVerRegistros1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnVerRegistros1.setText("Buscar Cita");
-        btnVerRegistros1.addActionListener(this::btnVerRegistros1ActionPerformed);
+        btnBuscarCita.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBuscarCita.setText("Buscar Cita");
+        btnBuscarCita.addActionListener(this::btnBuscarCitaActionPerformed);
 
-        btnVerRegistros2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnVerRegistros2.setText("Citas Pendientes");
-        btnVerRegistros2.addActionListener(this::btnVerRegistros2ActionPerformed);
+        btnCitasPendientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCitasPendientes.setText("Citas Pendientes");
+        btnCitasPendientes.addActionListener(this::btnCitasPendientesActionPerformed);
 
-        btnVerRegistros3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnVerRegistros3.setText("Cancelar Cita");
-        btnVerRegistros3.addActionListener(this::btnVerRegistros3ActionPerformed);
+        btnCancelarCita.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelarCita.setText("Cancelar Cita");
+        btnCancelarCita.addActionListener(this::btnCancelarCitaActionPerformed);
 
-        btnVerRegistros4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnVerRegistros4.setText("Reprogramar Cita");
-        btnVerRegistros4.addActionListener(this::btnVerRegistros4ActionPerformed);
+        btnReprogramarCita.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnReprogramarCita.setText("Reprogramar Cita");
+        btnReprogramarCita.addActionListener(this::btnReprogramarCitaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,33 +203,27 @@ implements FrmView<Appointment>{
                                         .addComponent(lblCorreo, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addComponent(lblNombre))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(comboxTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboxCorreo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboxID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnVerRegistros3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnVerRegistros2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                                    .addComponent(btnCancelarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnCitasPendientes, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnVerRegistros4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnReprogramarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnVerRegistros1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboxTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnVerRegistros, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -249,8 +247,9 @@ implements FrmView<Appointment>{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
+                            .addComponent(DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboxTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCorreo)
                             .addComponent(lblID))
@@ -266,13 +265,13 @@ implements FrmView<Appointment>{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnVerRegistros4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnVerRegistros2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnVerRegistros1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnReprogramarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCitasPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVerRegistros3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancelarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -311,21 +310,21 @@ implements FrmView<Appointment>{
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerRegistrosActionPerformed
 
-    private void btnVerRegistros1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRegistros1ActionPerformed
+    private void btnBuscarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCitaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerRegistros1ActionPerformed
+    }//GEN-LAST:event_btnBuscarCitaActionPerformed
 
-    private void btnVerRegistros2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRegistros2ActionPerformed
+    private void btnCitasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasPendientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerRegistros2ActionPerformed
+    }//GEN-LAST:event_btnCitasPendientesActionPerformed
 
-    private void btnVerRegistros3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRegistros3ActionPerformed
+    private void btnCancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCitaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerRegistros3ActionPerformed
+    }//GEN-LAST:event_btnCancelarCitaActionPerformed
 
-    private void btnVerRegistros4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRegistros4ActionPerformed
+    private void btnReprogramarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReprogramarCitaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerRegistros4ActionPerformed
+    }//GEN-LAST:event_btnReprogramarCitaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,19 +353,18 @@ implements FrmView<Appointment>{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateChooserFecha;
+    private javax.swing.JButton btnBuscarCita;
+    private javax.swing.JButton btnCancelarCita;
+    private javax.swing.JButton btnCitasPendientes;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnReprogramarCita;
     private javax.swing.JButton btnVerRegistros;
-    private javax.swing.JButton btnVerRegistros1;
-    private javax.swing.JButton btnVerRegistros2;
-    private javax.swing.JButton btnVerRegistros3;
-    private javax.swing.JButton btnVerRegistros4;
     private javax.swing.JComboBox<String> comboxCorreo;
     private javax.swing.JComboBox<String> comboxID;
     private javax.swing.JComboBox<String> comboxNombre;
     private javax.swing.JComboBox<String> comboxTelefono;
     private javax.swing.JComboBox<String> jComboBox4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCorreo;
