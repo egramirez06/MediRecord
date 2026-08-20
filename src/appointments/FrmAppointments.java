@@ -7,6 +7,9 @@ package appointments;
 import appointments.Appointment;
 import clinic.ClinicController;
 import clinic.FrmView;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,6 +36,9 @@ implements FrmView<Appointment>{
         comboxCorreo.setSelectedIndex(-1);
         comboxID.setSelectedIndex(-1);
         txtMotivo.setText("");
+        DateChooserFecha.setDate(null);
+        
+        comboxNombre.requestFocusInWindow();
     }
     @Override
     public void showData(Appointment data) {
@@ -42,6 +48,13 @@ implements FrmView<Appointment>{
         }
         comboxNombre.setSelectedItem(data.getPatient());
         txtMotivo.setText(data.getReason());
+        LocalDate date = data.getDate();
+        if(date !=null){
+            Date fecha = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            DateChooserFecha.setDate(fecha);
+        }else {
+            DateChooserFecha.setDate(null);
+        }
     }
     @Override
     public void showError(String error) {
@@ -78,7 +91,7 @@ implements FrmView<Appointment>{
         lblID = new javax.swing.JLabel();
         comboxID = new javax.swing.JComboBox<>();
         btnVerRegistros = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        DateChooserFecha = new com.toedter.calendar.JDateChooser();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,7 +178,7 @@ implements FrmView<Appointment>{
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(comboxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(DateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -212,7 +225,7 @@ implements FrmView<Appointment>{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCorreo)
@@ -292,6 +305,7 @@ implements FrmView<Appointment>{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser DateChooserFecha;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVerRegistros;
