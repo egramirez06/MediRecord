@@ -24,7 +24,19 @@ public class Clinic {
     public Clinic(){
         this.patients = new PatientsList();
         this.appointments = new AppointmentList();
-        this.waitingRoom = new WaitingRoomList();    
+        this.waitingRoom = new WaitingRoomList();  
+        
+        Patient Pat1= new Patient("50468024","Estefany Gonzalez",
+        LocalDate.of(2006,12,15),"61707000","stef@gmail.com");
+        addPatient(Pat1);
+        
+        Patient Pat2= new Patient("504640700","Nicole Artavia",
+        LocalDate.of(2006,3,22),"08089090","nico@gmail.com");
+        addPatient(Pat2);
+        
+        Patient Pat3= new Patient("119790331","Maria Flores",
+        LocalDate.of(2006,11,30),"11121314","mari@gmail.com");
+        addPatient(Pat3);
     }
     public boolean addPatient(Patient patient) {
      return patients.add(patient);
