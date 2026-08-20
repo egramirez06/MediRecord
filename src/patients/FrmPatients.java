@@ -10,6 +10,11 @@ import javax.swing.JOptionPane;
  *
  * @author maria
  */
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+import medicalrecords.frmMedicalRecord;
 public class FrmPatients extends javax.swing.JFrame {
     private Clinic clinic;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPatients.class.getName());
@@ -17,12 +22,16 @@ public class FrmPatients extends javax.swing.JFrame {
     /**
      * Creates new form FrmPatients
      */
-    public FrmPatients() {
-        initComponents();
-    }
-public FrmPatients(Clinic clinic) {
-    this.clinic = clinic;
+    private final PatientsList patientsList = new PatientsList();
+private Patient currentPatient;
+
+private static final DateTimeFormatter DATE_FORMAT = 
+    DateTimeFormatter.ofPattern("dd/MM/yyyy");
+  public FrmPatients() {
     initComponents();
+    btnModificar.addActionListener(this::btnModificarActionPerformed);
+    btnEliminar.addActionListener(this::btnEliminarActionPerformed);
+    btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +61,7 @@ public FrmPatients(Clinic clinic) {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        btnVerExpediente = new javax.swing.JButton();
         pnlinformacionPaciente = new javax.swing.JPanel();
         lblinformacionPaciente = new javax.swing.JLabel();
         lblNombrePaciente = new javax.swing.JLabel();
@@ -125,6 +135,9 @@ public FrmPatients(Clinic clinic) {
 
         btnLimpiar.setText("Limpiar");
 
+        btnVerExpediente.setText("Ver Expediente");
+        btnVerExpediente.addActionListener(this::btnVerExpedienteActionPerformed);
+
         javax.swing.GroupLayout pnlDatosPacienteLayout = new javax.swing.GroupLayout(pnlDatosPaciente);
         pnlDatosPaciente.setLayout(pnlDatosPacienteLayout);
         pnlDatosPacienteLayout.setHorizontalGroup(
@@ -169,6 +182,8 @@ public FrmPatients(Clinic clinic) {
             .addGroup(pnlDatosPacienteLayout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addComponent(btnLimpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVerExpediente)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlDatosPacienteLayout.setVerticalGroup(
@@ -205,7 +220,9 @@ public FrmPatients(Clinic clinic) {
                     .addComponent(btnModificar)
                     .addComponent(btnEliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLimpiar))
+                .addGroup(pnlDatosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnVerExpediente)))
         );
 
         lblinformacionPaciente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -349,12 +366,85 @@ public FrmPatients(Clinic clinic) {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        String id = txtIdentificacion.getText().trim();
+String fullName = txtNombre.getText().trim();
+String fechaTexto = txtFechaNacimiento.getText().trim();
+String phone = txtTelefono.getText().trim();
+String email = txtCorreo.getText().trim();
+
+if (id.isEmpty() || fullName.isEmpty() || fechaTexto.isEmpty()) {
+    JOptionPane.showMessageDialog(this,
+        "Identificación, nombre y fecha de nacimiento son obligatorios.",
+        "Datos incompletos", JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+LocalDate birthDate;
+try {
+    birthDate = LocalDate.parse(fechaTexto, DATE_FORMAT);
+} catch (DateTimeParseException e) {
+    JOptionPane.showMessageDialog(this,
+        "Fecha de nacimiento inválida. Use el formato dd/MM/yyyy (ej. 15/03/1990).",
+        "Formato incorrecto", JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+Patient nuevo = new Patient(id, fullName, birthDate, phone, email);
+boolean guardado = patientsList.add(nuevo);
+
+if (guardado) {
+    JOptionPane.showMessageDialog(this,
+        "Paciente guardado con éxito.",
+        "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    currentPatient = nuevo;
+    mostrarInfoPaciente(nuevo);
+    limpiarCamposIzquierda();
+} else {
+    JOptionPane.showMessageDialog(this,
+        "Ya existe un paciente con esa identificación.",
+        "Duplicado", JOptionPane.ERROR_MESSAGE);
+}
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        String id = txtIdentificacion.getText().trim();
+
+if (id.isEmpty()) {
+    JOptionPane.showMessageDialog(this,
+        "Escriba la identificación del paciente a buscar.",
+        "Aviso", JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+Patient encontrado = patientsList.get(id);
+
+if (encontrado == null) {
+    JOptionPane.showMessageDialog(this,
+        "No se encontró ningún paciente con esa identificación.",
+        "No encontrado", JOptionPane.WARNING_MESSAGE);
+    currentPatient = null;
+    limpiarInfoDerecha();
+    return;
+}
+
+currentPatient = encontrado;
+mostrarInfoPaciente(encontrado);
+
+txtNombre.setText(encontrado.getFullName());
+txtFechaNacimiento.setText(encontrado.getBirthDate().format(DATE_FORMAT));
+txtTelefono.setText(encontrado.getPhone());
+txtCorreo.setText(encontrado.getEmail());
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnVerExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerExpedienteActionPerformed
+     if (currentPatient == null) {
+    JOptionPane.showMessageDialog(this,
+        "Primero busque o guarde un paciente para ver su expediente.",
+        "Aviso", JOptionPane.WARNING_MESSAGE);
+    return;
+}
+new frmMedicalRecord(currentPatient).setVisible(true);
+    }//GEN-LAST:event_btnVerExpedienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,6 +477,7 @@ public FrmPatients(Clinic clinic) {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnVerExpediente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblContactoPaciente;
     private javax.swing.JLabel lblCorreo;
@@ -414,4 +505,77 @@ public FrmPatients(Clinic clinic) {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {
+    if (currentPatient == null) {
+        JOptionPane.showMessageDialog(this,
+            "Primero busque un paciente para poder modificarlo.",
+            "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    currentPatient.setPhone(txtTelefono.getText().trim());
+    currentPatient.setEmail(txtCorreo.getText().trim());
+
+    mostrarInfoPaciente(currentPatient);
+    JOptionPane.showMessageDialog(this,
+        "Teléfono y correo actualizados.",
+        "Éxito", JOptionPane.INFORMATION_MESSAGE);
+}
+
+private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+    String id = txtIdentificacion.getText().trim();
+    if (id.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+            "Escriba la identificación del paciente a eliminar.",
+            "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "¿Seguro que desea eliminar este paciente?",
+        "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        boolean eliminado = patientsList.remove(id);
+        if (eliminado) {
+            JOptionPane.showMessageDialog(this, "Paciente eliminado.");
+            currentPatient = null;
+            btnLimpiarActionPerformed(evt);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "No se encontró ese paciente.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
+private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {
+    limpiarCamposIzquierda();
+    limpiarInfoDerecha();
+    currentPatient = null;
+}
+
+private void limpiarCamposIzquierda() {
+    txtIdentificacion.setText("");
+    txtNombre.setText("");
+    txtFechaNacimiento.setText("");
+    txtTelefono.setText("");
+    txtCorreo.setText("");
+}
+
+private void limpiarInfoDerecha() {
+    lblNombredelPaciente.setText("");
+    lblIdentificacionPaciente.setText("");
+    lblEdadPaciente.setText("");
+    lblContactoPaciente.setText("");
+    lblCorreoDelPaciente.setText("");
+}
+
+private void mostrarInfoPaciente(Patient p) {
+    lblNombredelPaciente.setText(p.getFullName());
+    lblIdentificacionPaciente.setText(p.getId());
+    lblEdadPaciente.setText(String.valueOf(p.getAge()));
+    lblContactoPaciente.setText(p.getPhone());
+    lblCorreoDelPaciente.setText(p.getEmail());
+}
+
 }
