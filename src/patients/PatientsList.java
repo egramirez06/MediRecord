@@ -6,14 +6,12 @@ package patients;
 import clinic.KeyDynamicsLists;
 import java.util.HashMap;
 import java.util.Iterator;
-
 /**
  *
  * @author maria
  */
 public class PatientsList implements KeyDynamicsLists<Patient, String> {
     private HashMap<String, Patient> patients;
-
     public PatientsList() {
         this.patients = new HashMap();
     }
@@ -28,7 +26,7 @@ public class PatientsList implements KeyDynamicsLists<Patient, String> {
     }
     @Override
     public boolean add(Patient item){
-    if(patients.containsKey(item.Id())) return false;
+    if(patients.containsKey(item.getId())) return false;
     return patients.put(item.getId(), item)==null;
 }
     @Override
@@ -45,4 +43,3 @@ public class PatientsList implements KeyDynamicsLists<Patient, String> {
     return  patients.isEmpty();
 }
 }
-  
