@@ -1,19 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package appointments;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import patients.Patient;
-
-/**
- *
- * @author jprod
- */
-public class Appointment {
-    //implememtar Comparable<Appointment>
+public class Appointment implements Comparable<Appointment> {
     private String code;
     private Patient patient;
     private LocalDate date;
@@ -24,23 +13,18 @@ public class Appointment {
     public String getCode() {
         return code;
     }
-
     public Patient getPatient() {
         return patient;
     }
-
     public LocalDate getDate() {
         return date;
     }
-
     public LocalTime getTime() {
         return time;
     }
-
     public String getReason() {
         return reason;
     }
-
     public AppointmentStatus getStatus() {
         return status;
     }
@@ -53,23 +37,34 @@ public class Appointment {
         this.reason = reason;
         this.status = AppointmentStatus.SCHEDULED;
     }
-    
-    public void reschedule(LocalDate newDate, LocalTime newTime){
-        
+
+    public void reschedule(LocalDate newDate, LocalTime newTime) {
+        this.date = newDate;
+        this.time = newTime;
+        this.status = AppointmentStatus.SCHEDULED;
     }
 
-    public void cancel(){
-        
+    public void cancel() {
+        this.status = AppointmentStatus.CANCELLED;
     }
 
-    public boolean isPending(){
-        return false;
+    public boolean isPending() {
+        return status == AppointmentStatus.SCHEDULED;
     }
 
-    public boolean isToday(){
-        return false;
+    public boolean isToday() {
+        return date.equals(LocalDate.now());
     }
 
-    //public int compareTo(Appointment other); date → time → code
-
+    @Override
+    public int compareTo(Appointment other) {
+        int comp = this.date.compareTo(other.date);
+        if (comp == 0) {
+            comp = this.time.compareTo(other.time);
+        }
+        if (comp == 0) {
+            comp = this.code.compareTo(other.code);
+        }
+        return comp;
+    }
 }
