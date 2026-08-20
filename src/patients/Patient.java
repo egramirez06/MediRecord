@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Iterator;
 import medicalrecords.MedicalRecord;
-import medicalrecords.MedicalRecordsList;
+import medicalrecords.medicalrecordslist;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Patient {
     private LocalDate birthDate;
     private String phone;
     private String email;
-    private MedicalRecordsList medicalHistory;
+    private medicalrecordslist medicalHistory;
 
     public String getId() {
         return id;
@@ -85,10 +85,6 @@ public class Patient {
     
     public boolean hasMedicalHistory(){
         return false;
-    }
-
-    Object Id() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     Object Id() {
