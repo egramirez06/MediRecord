@@ -4,21 +4,47 @@
  */
 package appointments;
 
+import appointments.Appointment;
+import clinic.ClinicController;
+import clinic.FrmView;
+
 /**
  *
  * @author Stef
  */
-public class FrmAppointments extends javax.swing.JFrame {
+public class FrmAppointments extends javax.swing.JFrame
+implements FrmView<Appointment>{
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmAppointments.class.getName());
-
+    private ClinicController controller;
     /**
      * Creates new form FrmAppointments
      */
     public FrmAppointments() {
         initComponents();
+        controller = ClinicController.getInstance(this);
     }
 
+    @Override
+    public void clear() {
+        
+    }
+
+    @Override
+    public void showData(Appointment data) {
+        
+    }
+
+    @Override
+    public void showError(String error) {
+        
+    }
+
+    @Override
+    public void showMessage(String message) {
+        
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -281,4 +307,4 @@ public class FrmAppointments extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
-}
+
