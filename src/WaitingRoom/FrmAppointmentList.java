@@ -4,19 +4,25 @@
  */
 package WaitingRoom;
 
+import clinic.ClinicController;
+import clinic.FrmView;
+import patients.Patient;
+
 /**
  *
  * @author maria
  */
-public class FrmAppointmentList extends javax.swing.JFrame {
+public class FrmAppointmentList extends javax.swing.JFrame 
+implements FrmView{
    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmAppointmentList.class.getName());
-
+    private ClinicController controller; 
     /**
      * Creates new form FrmWaitingRoom
      */
     public FrmAppointmentList() {
         initComponents();
+        controller = ClinicController.getInstance(this);
     }
 
     /**
@@ -213,7 +219,18 @@ public class FrmAppointmentList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
-        // TODO add your handling code here:
+        String id = txtIdentificacion.getText();
+        if(id.trim().equals("")){
+            return;
+        }
+        controller.findPatient(id);
+        Patient pat = controller.findPatient(id);
+        if(pat == null){
+            showError("El paciente no existe");
+            clear();
+            return;
+        }
+        txtNombre.setText(pat.getFullName());
     }//GEN-LAST:event_txtIdentificacionActionPerformed
 
     /**
@@ -262,4 +279,28 @@ public class FrmAppointmentList extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUltimaConsulta;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void clear() {
+        txtID.setText("");
+            txtNombre.setText("");
+            date.setDate(null);
+            time.setText("");
+            motivo.setText("");
+    }
+
+    @Override
+    public void showData(Object data) {
+        
+    }
+
+    @Override
+    public void showError(String error) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void showMessage(String message) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
